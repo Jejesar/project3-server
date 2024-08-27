@@ -10,11 +10,11 @@ app.use(express.json());
 app.post("/new", async (req: Request, res: Response) => {
   try {
     const { type } = req.body;
-    if (!type || !["Métal", "Non-métal", "Autre"].includes(type)) {
+    if (!type || !["METAL", "OTHER"].includes(type)) {
       return res.status(400).json({ error: "Invalid type provided" });
     }
 
-    const valueId = type === "Métal" ? 1 : type === "Non-métal" ? 2 : 3;
+    const valueId = type === "METAL" ? 1 : type === "OTHER" ? 2 : 3;
 
     const measurement = await prisma.measurement.create({
       data: {
@@ -96,6 +96,18 @@ app.post("/manual/new", async (req: Request, res: Response) => {
     });
 
     res.status(201).json(measurement);
+
+    await prisma.measurement.update({
+      where: { id: measurement.id },
+      data: {
+        value:
+          measurement.valueId === 1
+            ? "METAL"
+            : measurement.valueId === 2
+            ? "OTHER"
+            : "Inconnu",
+      },
+    });
   } catch (error) {
     res.status(500).json({ error: "Error creating manual measurement" });
   }
