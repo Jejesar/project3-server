@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  # express:
+  #   image: node:22-slim
+  #   volumes:
+  #     - ./server:/app
+  # db:
+  #   image: mysql
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: project-iot
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
+  #   volumes:
+  #     - ./db:/var/lib/mysql
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   ports:
+  #     - 8080:80
+  #   environment:
+  #     PMA_HOST: db
+  #     MYSQL_ROOT_PASSWORD: root
